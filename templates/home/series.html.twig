@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{# {% block title %}Les listes{% endblock %} #}
+
+
+{% block body %}
+
+
+<div class="">
+    <h1>Page d'affichage des séries</h1>
+
+    {% for serie in series %}
+        <li>{{ serie.titre }}</li>
+    {% endfor %}
+   
+</div>
+
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
+
+{% endblock %}
