@@ -1,0 +1,19 @@
+{% for serie in series  %}
+	<div  class="card_anime" >
+		<a href="{{ path('app_serie_show', {'id': serie.id}) }}">
+		{# <div class="card_anime"> #}
+		<div class="hover-description">
+			<p>
+		
+				{# {{serie.description}} #}
+				{# Saitama est un jeune homme sans emploi et sans réelle perspective d'avenir, jusqu'au jour où il décide de prendre sa vie en main. Son nouvel objectif : devenir un super-héros. #}
+				
+			</p>
+		</div>
+		<img class="img_anime" src="{{serie.image}}">
+		
+		<div class="titre_anime">{{ serie.titre }}</div>
+	
+		</a>
+	</div>
+{% endfor %}

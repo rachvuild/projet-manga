@@ -32,6 +32,11 @@ class Hero
      */
     private $serie;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
     public function __toString()
     {
         return $this->nom . ' #' . $this->id;
@@ -74,6 +79,18 @@ class Hero
     public function setSerie(?Serie $serie): self
     {
         $this->serie = $serie;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+	{% block body %}
+	<div class="grid-anime">
+		<div class="sidebar_elements">
+			<img class="img_anime_home" src="{{serie.image}}">
+			<h2>{{serie.titre}}</h2>
+			<p>{{serie.type}}</p>
+			<p>realisateur</p>
+		</div>
+
+		<div class="description">
+			{# {{serie.livres}} #}
+			<div>
+				<a href=""></a>
+			</div>
+		</div>
+
+		<div class="list-hero">
+		
+        {% include  "home/cardHero.html.twig" with {'heros': serie.heroes} %}
+		</div>
+
+ <a href="{{ path('app_serie_edit', {'id': serie.id}) }}">edit</a>
+
+    {{ include('serie/_delete_form.html.twig') }}
+
+
+	</div>
+	{% endblock %}

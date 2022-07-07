@@ -37,6 +37,7 @@ class Livre
      */
     private $serie;
 
+    
     public function __toString()
     {
         return $this->titre . ' #' . $this->id;
@@ -87,10 +88,11 @@ class Livre
     {
         return $this->serie;
     }
-
+    
     public function setSerie(?Serie $serie): self
     {
         $this->serie = $serie;
+      
 
         return $this;
     }

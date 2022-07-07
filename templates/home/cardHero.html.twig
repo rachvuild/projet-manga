@@ -1,0 +1,14 @@
+{% for hero in heros  %}
+	<div class="card_hero">
+		<a href="{{ path('app_hero_show', {'id': hero.id}) }}">
+			{# <div class="card_hero"> #}
+			<div class="puissance">
+				{{hero.puissance}}
+			</div>
+			<img class="img-hero" src="{{hero.image}}">
+			<div class="titre_hero">{{ hero.nom }}</div>
+
+
+		</a>
+	</div>
+{% endfor %}

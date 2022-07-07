@@ -22,6 +22,7 @@ class SerieController extends AbstractController
     public function index(SerieRepository $serieRepository): Response
     {
         return $this->render('serie/index.html.twig', [
+        // return $this->render('home/home.html.twig', [
             'series' => $serieRepository->findAll(),
         ]);
     }
@@ -34,10 +35,8 @@ class SerieController extends AbstractController
         $serie = new Serie();
         $form = $this->createForm(SerieType::class, $serie);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $serieRepository->add($serie, true);
-
             return $this->redirectToRoute('app_serie_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -52,8 +51,10 @@ class SerieController extends AbstractController
      */
     public function show(Serie $serie): Response
     {
-        return $this->render('serie/show.html.twig', [
+        
+        return $this->render('home/serieBody.html.twig', [
             'serie' => $serie,
+            
         ]);
     }
 
@@ -62,6 +63,7 @@ class SerieController extends AbstractController
      */
     public function edit(Request $request, Serie $serie, SerieRepository $serieRepository, EntityManagerInterface $em): Response
     {
+        
         $form = $this->createForm(SerieType::class, $serie);
         $form->handleRequest($request);
 

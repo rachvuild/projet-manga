@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}livre{% endblock %}
+
+{% block body %}
+    <h1>livre</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ livre.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ livre.titre }}</td>
+            </tr>
+            <tr>
+                <th>Soutitre</th>
+                <td>{{ livre.Soutitre }}</td>
+            </tr>
+            <tr>
+                <th>description</th>
+                <td>{{ livre.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <ul>
+    {% for serie in livre.serie %}
+        <li>
+            {{ serie.titre }}
+        </li>
+    {% endfor %}
+    </ul>
+
+    <a href="{{ path('app_livre_index') }}">back to list</a>
+
+    <a href="{{ path('app_livre_edit', {'id': livre.id}) }}">edit</a>
+
+    {{ include('livre/_delete_form.html.twig') }}
+{% endblock %}

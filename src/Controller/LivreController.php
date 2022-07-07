@@ -2,44 +2,89 @@
 
 namespace App\Controller;
 
-use App\Repository\LivreRepository;
 use App\Entity\Livre;
+// use App\From\LivreType;
+use App\Form\LivreType;
+use App\Repository\LivreRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
+/**
+ * @Route("/livre")
+ */
 class LivreController extends AbstractController
 {
     /**
-     * @Route("/List_Livre", name="app_Livre")
+     * @Route("/", name="app_livre_index", methods={"GET"})
      */
-    public function dysplayLivres(LivreRepository $LivreRepository)
+    public function index(LivreRepository $livreRepository): Response
     {
-        $livre = $LivreRepository->findAll();
+        return $this->render('livre/index.html.twig', [
+            'livre' => $livreRepository->findAll(),
+        ]);
     }
+   
     /**
-     * @Route("/Add_Livre", name="Add_Livre")
+     * @Route("/new", name="app_livre_new", methods={"GET", "POST"})
      */
-    public function addLivres(LivreRepository $LivreRepository)
+    public function new(Request $request, Livre $livre, LivreRepository $livreRepository): Response
     {
-        $TitreLivre = $_POST['TitreLivre'];
-        $SoutitreLivre = $_POST['SoutitreLivre'];
-        $DescriptionLivre = $_POST['DescriptionLivre'];
-        $livre = new Livre();
-       $livre =$livre->setTitre($TitreLivre);
-       $livre =$livre->setSoutitre($SoutitreLivre);
-       $livre =$livre->setDescription($DescriptionLivre);
-        $livre = $LivreRepository->add($livre);
-        dd($livre);
+        
+        $form = $this->createForm(LivreType::class, $livre);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $livreRepository->add($livre, true);
+            return $this->redirectToRoute('app_livre_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('livre/new.html.twig', [
+            'livre' => $livre,
+            'form' => $form,
+        ]);
     }
-    /**
-     * @Route("/remove_Livre", name="remove_Livre")
+  /**
+     * @Route("/{id}", name="app_livre_show", methods={"GET"})
      */
-    public function removeLivres(LivreRepository $LivreRepository)
+    public function show(Livre $livre): Response
     {
-        $IdLivre = $_POST['IdLivre'];
-        $livre= $LivreRepository->find($IdLivre);
-        $livre = $LivreRepository->remove($livre);
-        dd($livre);
+        return $this->render('livre/show.html.twig', [
+            'livre' => $livre,
+        ]);
+    }
+
+      /**
+     * @Route("/{id}/edit", name="app_livre_edit", methods={"GET", "POST"})
+     */
+    public function edit(Request $request, Livre $livre, LivreRepository $livreRepository, EntityManagerInterface $em): Response
+    {
+        $form = $this->createForm(LivreType::class, $livre);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $livreRepository->add($livre, true);
+
+            return $this->redirectToRoute('app_livre_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('livre/edit.html.twig', [
+            'livre' => $livre,
+            'form' => $form,
+        ]);
+    }
+     /**
+     * @Route("/{id}", name="app_livre_delete", methods={"POST"})
+     */
+    public function delete(Request $request, Livre $livre, LivreRepository $livreRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$livre->getId(), $request->request->get('_token'))) {
+            $livreRepository->remove($livre, true);
+        }
+
+        return $this->redirectToRoute('app_livre_index', [], Response::HTTP_SEE_OTHER);
     }
  
 }

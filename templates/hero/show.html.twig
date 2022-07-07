@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}hero{% endblock %}
+
+{% block body %}
+    <h1>hero</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ hero.id }}</td>
+            </tr>
+            <tr>
+                <th>nom</th>
+                <td>{{ hero.nom }}</td>
+            </tr>
+            <tr>
+                <th>puissance</th>
+                <td>{{ hero.puissance }}</td>
+            </tr>
+          
+        </tbody>
+    </table>
+    <ul>
+    {% for serie in hero.serie %}
+        <li>
+            {{ serie.titre }}
+        </li>
+    {% endfor %}
+    </ul>
+
+    <a href="{{ path('app_hero_index') }}">back to list</a>
+
+    <a href="{{ path('app_hero_edit', {'id': hero.id}) }}">edit</a>
+
+    {{ include('hero/_delete_form.html.twig') }}
+{% endblock %}

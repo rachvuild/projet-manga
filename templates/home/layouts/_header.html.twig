@@ -1,0 +1,26 @@
+{% block header %}
+
+	<div class="headers">
+		<div class="header">
+			<h1  >Visite Anime</h1>
+			<label for="check" class="bar">
+				<input id="check" type="checkbox">
+
+				<span class="top"></span>
+				<span class="middle"></span>
+				<span class="bottom"></span>
+			</label>
+			<div id="active-header" class="header-anime">
+				<a href="{{ path('app_serie_index') }}">Niv Principal</a>
+				<a href="">Niv Hero</a>
+				<a id="mod-active" >Niv mod</a>
+				<div id="mod-start" class="mod-active">
+				<a class="mod" href="{{ path('app_livre_index') }}">Niv Livre</a>
+				<a class="mod" href="{{ path('app_serie_index') }}">Niv Serie</a>
+				<a class="mod" href="{{ path('app_hero_index') }}">Niv Hero</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

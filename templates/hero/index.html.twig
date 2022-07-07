@@ -1,5 +1,40 @@
-<h1>les heros </h1>
+{% extends 'base.html.twig' %}
 
-<pre>
-    {{ dump() }}
-</pre>
+{% block title %}Hero index{% endblock %}
+
+{% block body %}
+    <h1>Hero index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Puissance</th>
+                
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for hero in heros %}
+            <tr>
+                <td>{{ hero.id }}</td>
+                <td>{{ hero.nom }}</td>
+                <td>{{ hero.puissance }}</td>
+               
+                <td>
+                
+                    <a href="{{ path('app_hero_show', {'id': hero.id}) }}">show</a>
+                    <a href="{{ path('app_hero_edit', {'id': hero.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_hero_new') }}">Create new</a>
+{% endblock %}

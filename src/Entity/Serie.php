@@ -44,6 +44,16 @@ class Serie
      */
     private $livres;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
+    public function __toString()
+    {
+        return $this->titre . ' #' . $this->id;
+    }
+
     public function __construct()
     {
         $this->heroes = new ArrayCollection();
@@ -78,6 +88,7 @@ class Serie
 
         return $this;
     }
+
 
     /**
      * @return Collection<int, Hero>
@@ -131,6 +142,7 @@ class Serie
 
     public function addLivre(Livre $livre): self
     {
+        //dd($livre);
         if (!$this->livres->contains($livre)) {
             $this->livres[] = $livre;
             $livre->setSerie($this);
@@ -147,6 +159,18 @@ class Serie
                 $livre->setSerie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
