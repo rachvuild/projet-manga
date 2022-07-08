@@ -6,10 +6,11 @@ use App\Entity\Serie;
 use App\Form\SerieType;
 use App\Repository\SerieRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/serie")
@@ -18,6 +19,7 @@ class SerieController extends AbstractController
 {
     /**
      * @Route("/", name="app_serie_index", methods={"GET"})
+     * @IsGranted("ROLE_USER")
      */
     public function index(SerieRepository $serieRepository): Response
     {
@@ -45,7 +47,8 @@ class SerieController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    
+    
     /**
      * @Route("/{id}", name="app_serie_show", methods={"GET"})
      */

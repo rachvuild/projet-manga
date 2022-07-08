@@ -30,6 +30,19 @@ class HomeController extends AbstractController
             'livres' => $livres,
         ]);
     }
+
+    /**
+     * @Route("/user", name="app_user")
+     */
+    public function homeUser(): Response
+    {
+        $user = $this->getUser();
+
+        // Rendu d'une vue avec transmission des variables : 
+        return $this->render('user.html.twig', [
+            'user' => $user,
+        ]);
+    }
     /**
      * @Route("/cardhero", name="app_cardhero")
      */

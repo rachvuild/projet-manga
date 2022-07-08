@@ -22,6 +22,30 @@ modActive.addEventListener("click", () => {
 
 });
 
+
+const utilisateur = document.querySelector('#utilisateur')
+let moding = document.querySelector('#ustilisateur-start')
+
+
+utilisateur.addEventListener("click", () => {
+
+    console.log('11');
+    moding.classList.toggle("start");
+
+});
+const switchinscriptionconnexion = document.querySelector('#switch-inscription-connexion')
+let conternaireconnexion = document.querySelector('#conternaire-connexion')
+let conternaireinscription = document.querySelector('#conternaire-inscription')
+
+
+switchinscriptionconnexion.addEventListener("click", () => {
+
+    console.log('13');
+    conternaireconnexion.classList.toggle("off");
+    conternaireinscription.classList.toggle("on");
+
+});
+
  
 
 

@@ -1,0 +1,12 @@
+{% block form %}
+
+<form action="{{ path('app_connexion_connexion') }}" method="POST">
+						<input class="btn-connexion" type="text" name="login" id="login" placeholder="Enter your login:" required>
+					</br>
+					<input class="btn-connexion" type="password" name="password" id="password" placeholder="Enter your password:" required>
+
+					<button type="submit">LOGIN</button>
+						{# <a id="switch-inscription-connexion">inscription</a> #}
+				</form>
+
+{% endblock %}

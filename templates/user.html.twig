@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+{# <pre>
+    {{ dump(user) }}
+</pre> #}
+
+    <h1>bienvenue</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+          
+            
+            <tr>
+                <th>email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+          
+        </tbody>
+    </table>
+    {# <ul>
+    {% for serie in user.serie %}
+        <li>
+            {{ serie.titre }}
+        </li>
+    {% endfor %}
+    </ul> #}
+
+    <a href="{{ path('app_user_index') }}">back to list</a>
+
+    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+
+    {{ include('user/_delete_form.html.twig') }}
+   
+{% endblock %}

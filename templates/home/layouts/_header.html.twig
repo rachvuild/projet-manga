@@ -2,7 +2,7 @@
 
 	<div class="headers">
 		<div class="header">
-			<h1  >Visite Anime</h1>
+			<h1>Visite Anime</h1>
 			<label for="check" class="bar">
 				<input id="check" type="checkbox">
 
@@ -11,16 +11,41 @@
 				<span class="bottom"></span>
 			</label>
 			<div id="active-header" class="header-anime">
-				<a href="{{ path('app_serie_index') }}">Niv Principal</a>
-				<a href="">Niv Hero</a>
-				<a id="mod-active" >Niv mod</a>
-				<div id="mod-start" class="mod-active">
+				<a href="{{ path('app_home') }}">Niv Principal</a>
+				<a href="{{ path('app_login') }}" id="utilisateur">Niv Connexion</a>
+				<a href="{{ path('app_register') }}" id="utilisateur">Niv s'inscrire</a>
+				<a id="mod-active">Niv Mod</a>
+		{% if (user.role == ('ROLE_USER')) %}
+			<h1>pol</h1>
+
+		{% endif %}
+
+					{# <div class="conternaire-connexion" id="conternaire-connexion">
+					<h3>connexion</h3>
+					<form action="">
+						<input class="btn-connexion" type="text" name="name" id="name" placeholder="Enter your login:" required>
+					</br>
+					<input class="btn-connexion" type="password" name="password" id="password" placeholder="Enter your password:" required>
+
+					<button type="submit">LOGIN</button>
+						{# <a id="switch-inscription-connexion">inscription</a> #}
+				{# </form>
+				 <a href="{{ path('app_user_new') }}">inscription</a>
+				</div>
+
+
+				<div class="conternaire-inscription" id="conternaire-inscription">
+				<h3>inscription</h3>
+				{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }} #} 
+				
+			<div id="mod-start" class="mod-active">
 				<a class="mod" href="{{ path('app_livre_index') }}">Niv Livre</a>
 				<a class="mod" href="{{ path('app_serie_index') }}">Niv Serie</a>
 				<a class="mod" href="{{ path('app_hero_index') }}">Niv Hero</a>
-				</div>
 			</div>
-		</div>
+	
 	</div>
-
-{% endblock %}
+</div>{% endblock %}

@@ -6,6 +6,7 @@ use App\Entity\Hero;
 use App\Form\HeroType;
 use App\Repository\HeroRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,6 +19,7 @@ class HeroController extends AbstractController
 {
       /**
      * @Route("/", name="app_hero_index", methods={"GET"})
+     * @IsGranted("ROLE_USER")
      */
     public function index(HeroRepository $heroRepository): Response
     {
@@ -45,9 +47,12 @@ class HeroController extends AbstractController
         ]);
     }
 
+   
     /**
      * @Route("/{id}", name="app_hero_show", methods={"GET"})
+     *
      */
+   
     public function show(Hero $hero): Response
     {
         return $this->render('hero/show.html.twig', [
@@ -57,7 +62,9 @@ class HeroController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="app_hero_edit", methods={"GET", "POST"})
+     * 
      */
+   
     public function edit(Request $request, Hero $hero, HeroRepository $heroRepository, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(HeroType::class, $hero);
