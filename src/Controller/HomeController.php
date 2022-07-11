@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\HeroRepository;
 use App\Repository\LivreRepository;
 use App\Repository\SerieRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,12 +23,13 @@ class HomeController extends AbstractController
     {
         $livres = $livreRepo->findAll();
         $series = $serieRepo->findAll(); 
-
+        
         // Rendu d'une vue avec transmission des variables : 
         return $this->render('home/home.html.twig', [
             'controller_name' => 'HomeController',
             'series' => $series,
             'livres' => $livres,
+            
         ]);
     }
 
@@ -59,6 +61,8 @@ class HomeController extends AbstractController
            
         ]);
     }
+   
+
 
      /**
      * @Route("/series", name="app_series")

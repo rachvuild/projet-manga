@@ -1,5 +1,5 @@
 {% for hero in heros  %}
-	<div class="card_hero">
+	<div id="{{hero.id}}" class="card_hero">
 		<a href="{{ path('app_hero_show', {'id': hero.id}) }}">
 			{# <div class="card_hero"> #}
 			<div class="puissance">
